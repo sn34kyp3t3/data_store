@@ -1,0 +1,13 @@
+blinker==1.9.0
+click==8.1.7
+Flask==3.1.0
+fusepy==3.0.1
+grpcio==1.68.0
+grpcio-tools==1.68.0
+indexed_gzip==1.9.4
+itsdangerous==2.2.0
+Jinja2==3.1.4
+MarkupSafe==3.0.2
+protobuf==5.29.0
+setuptools==75.6.0
+Werkzeug==3.1.3

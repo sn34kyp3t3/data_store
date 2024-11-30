@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package dfs;
+
+// Service definitions
+service LeaderService {
+  rpc UploadFile(FileUploadRequest) returns (FileUploadResponse);
+  rpc ReadFile(FileReadRequest) returns (stream FileReadResponse);
+  rpc DeleteFile(FileDeleteRequest) returns (FileDeleteResponse);
+}
+
+service DataNodeService {
+  rpc StoreChunk(Chunk) returns (StoreChunkResponse);
+  rpc RetrieveChunk(ChunkRequest) returns (Chunk);
+  rpc DeleteChunk(ChunkRequest) returns (DeleteChunkResponse);
+  rpc Heartbeat(HeartbeatRequest) returns (HeartbeatResponse);
+}
+
+// Message definitions
+message FileUploadRequest {
+  string file_name = 1;
+  bytes data = 2; // For simplicity; for large files, consider streaming
+}
+
+message FileUploadResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message FileReadRequest { string file_name = 1; }
+
+message FileReadResponse { bytes data = 1; }
+
+message FileDeleteRequest { string file_name = 1; }
+
+message FileDeleteResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message Chunk {
+  string chunk_id = 1;
+  bytes data = 2;
+}
+
+message StoreChunkResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message ChunkRequest { string chunk_id = 1; }
+
+message DeleteChunkResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message HeartbeatRequest {}
+
+message HeartbeatResponse { bool alive = 1; }

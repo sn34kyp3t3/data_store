@@ -1,0 +1,32 @@
+version: "3"
+services:
+  leader:
+    environment:
+      - DATA_NODES=datanode1:5001,datanode2:5001,datanode3:5001
+    build: ./leader
+    volumes:
+      - ./test_file.txt:/app/test_file.txt
+    ports:
+      - "5000:5000"
+    networks:
+      - dfs-net
+  datanode1:
+    build: ./datanode
+    ports:
+      - "5001:5001"
+    networks:
+      - dfs-net
+  datanode2:
+    build: ./datanode
+    ports:
+      - "5002:5001"
+    networks:
+      - dfs-net
+  datanode3:
+    build: ./datanode
+    ports:
+      - "5003:5001"
+    networks:
+      - dfs-net
+networks:
+  dfs-net:
